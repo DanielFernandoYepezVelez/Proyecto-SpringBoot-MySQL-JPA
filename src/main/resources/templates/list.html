@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" />
+
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+		<div class="card bg-light">
+			<div class="card-header" th:text="${title}"></div>
+			
+			<div class="card-body">
+				<h1 class="card-title">
+					<a th:href="@{/form}" class="btn btn-success btn-xs">Crear Cliente</a>
+				</h1>
+
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>id</th>
+							<th>Nombre</th>
+							<th>Apellido</th>
+							<th>Email</th>
+							<th>Fecha</th>
+							<th>Editar</th>
+							<th>Eliminar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="client: ${clients}">
+							<td th:text="${client.id}"></td>
+							<td th:text="${client.name}"></td>
+							<td th:text="${client.lastName}"></td>
+							<td th:text="${client.email}"></td>
+							<td th:text="${client.createdAt}"></td>
+							<td><a th:href="@{/form/} + ${client.id}" class="btn btn-primary btn-xs">Editar</a></td>
+							<td><a th:href="@{/delete/} + ${client.id}" class="btn btn-danger btn-xs"
+									onclick="confirm('¿Estás Seguro Que Quieres Elimina?');">Eliminar</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+
+</html>
